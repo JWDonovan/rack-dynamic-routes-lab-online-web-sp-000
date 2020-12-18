@@ -11,7 +11,9 @@ class Application
     if req.path.match(/items/)
       item = req.path.split("/items/").last
 
-      if @@items.include?(item)
+      if item = @@items.find do |item|
+        item.name == item_name
+        end
         resp.write item.price
       else
         resp.status = 400
